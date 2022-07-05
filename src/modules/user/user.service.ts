@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { MapperService } from '../../shared/mapper.service';
 import { UserDto } from './dto/user.dto';
+import { UserDetails } from './user.details.entity';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -45,6 +46,8 @@ export class UserService {
   }
 
   async create(user: User): Promise<UserDto> {
+    const details = new UserDetails();
+    user.details = details;
     const savedUser: User = await this._userRepository.save(user);
     return this._mapperService.map<User, UserDto>(savedUser, new UserDto());
   }
