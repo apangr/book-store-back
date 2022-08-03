@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MapperService } from '../../shared/mapper.service';
 import { Role } from './role.entity';
 import { RoleRepository } from './role.repository';
 
@@ -13,7 +12,6 @@ export class RoleService {
   constructor(
     @InjectRepository(RoleRepository)
     private readonly _roleRepository: RoleRepository,
-    private readonly _mapperService: MapperService,
   ) {}
 
   async get(id: number): Promise<Role> {
